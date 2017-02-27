@@ -20,6 +20,13 @@
 # definition file).
 #
 
+# Flags
+LOCAL_CFLAGS += -Wno-error-implicit-function-declaration
+TARGET_GLOBAL_CFLAGS += -Wno-error-implicit-function-declaration
+#-Werror=implicit-function-declaration
+#TARGET_GLOBAL_CPPFLAGS +=
+#COMMON_GLOBAL_CFLAGS +=
+
 TARGET_OTA_ASSERT_DEVICE := OnePlus3,oneplus3,OnePlus3t,oneplus3t
 
 PLATFORM_PATH := device/oneplus/oneplus3
@@ -141,6 +148,7 @@ MR_PIXEL_FORMAT := "RGBA_8888"
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 MR_DEV_BLOCK_BOOTDEVICE := true
 MR_ENCRYPTION := true
+MR_ENCRYPTION_SETUP_SCRIPT := $(PLATFORM_PATH)/multirom/mr_cp_crypto.sh
 
 # Versioning
 TW_DEVICE_VERSION := 3
