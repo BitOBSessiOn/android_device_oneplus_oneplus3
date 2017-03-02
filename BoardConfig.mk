@@ -29,7 +29,7 @@ TARGET_GLOBAL_CFLAGS += -Wno-error-implicit-function-declaration
 
 TARGET_OTA_ASSERT_DEVICE := OnePlus3,oneplus3,OnePlus3t,oneplus3t
 
-PLATFORM_PATH := device/oneplus/oneplus3
+BOARD_PATH := device/oneplus/oneplus3
 
 BOARD_VENDOR := oneplus
 
@@ -72,7 +72,7 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 #TARGET_KERNEL_CONFIG := lineageos_oneplus3_defconfig
 #TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 
-TARGET_PREBUILT_KERNEL := $(PLATFORM_PATH)/Image.gz-dtb
+TARGET_PREBUILT_KERNEL := $(BOARD_PATH)/Image.gz-dtb
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
@@ -100,7 +100,7 @@ BOARD_FLASH_BLOCK_SIZE := 262144
 #include device/qcom/sepolicy/sepolicy.mk
 
 # Recovery
-TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB := $(BOARD_PATH)/rootdir/etc/fstab.qcom
 BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
@@ -131,16 +131,16 @@ MR_CONTINUOUS_FB_UPDATE := true
 MR_DPI := xhdpi
 MR_DPI_FONT := 340
 MR_USE_MROM_FSTAB := true
-MR_FSTAB := $(PLATFORM_PATH)/multirom/mrom.fstab
+MR_FSTAB := $(BOARD_PATH)/multirom/mrom.fstab
 MR_INPUT_TYPE := type_b
-MR_INIT_DEVICES := $(PLATFORM_PATH)/multirom/mr_init_devices.c
+MR_INIT_DEVICES := $(BOARD_PATH)/multirom/mr_init_devices.c
 MR_KEXEC_MEM_MIN := 0xac000000
 MR_KEXEC_DTB := true
-MR_DEVICE_HOOKS := $(PLATFORM_PATH)/multirom/mr_hooks.c
+MR_DEVICE_HOOKS := $(BOARD_PATH)/multirom/mr_hooks.c
 MR_DEVICE_HOOKS_VER := 1
 MR_DEVICE_VARIANTS := OnePlus3 oneplus3 OnePlus3T oneplus3t
 MR_USE_QCOM_OVERLAY := true
-MR_QCOM_OVERLAY_HEADER := $(PLATFORM_PATH)/multirom/mr_qcom_overlay.h
+MR_QCOM_OVERLAY_HEADER := $(BOARD_PATH)/multirom/mr_qcom_overlay.h
 MR_QCOM_OVERLAY_CUSTOM_PIXEL_FORMAT := MDP_RGBX_8888
 # bootmenu
 DEVICE_RESOLUTION := 1080x1920
@@ -148,12 +148,12 @@ MR_PIXEL_FORMAT := "RGBA_8888"
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 MR_DEV_BLOCK_BOOTDEVICE := true
 MR_ENCRYPTION := true
-MR_ENCRYPTION_SETUP_SCRIPT := $(PLATFORM_PATH)/multirom/mr_cp_crypto.sh
+MR_ENCRYPTION_SETUP_SCRIPT := $(BOARD_PATH)/multirom/mr_cp_crypto.sh
 
 # Versioning
 TW_DEVICE_VERSION := 3
 
-include device/common/version-info/MR_REC_VERSION.mk
+include $(BOARD_PATH)/multirom/version/MR_REC_VERSION.mk
 
 ifeq ($(MR_REC_VERSION),)
 MR_REC_VERSION := $(shell date -u +%Y%m%d)-01
