@@ -137,7 +137,7 @@ MR_INIT_DEVICES := $(BOARD_PATH)/multirom/mr_init_devices.c
 MR_KEXEC_MEM_MIN := 0xac000000
 MR_KEXEC_DTB := true
 MR_DEVICE_HOOKS := $(BOARD_PATH)/multirom/mr_hooks.c
-MR_DEVICE_HOOKS_VER := 1
+MR_DEVICE_HOOKS_VER := 4
 MR_DEVICE_VARIANTS := OnePlus3 oneplus3 OnePlus3T oneplus3t
 MR_USE_QCOM_OVERLAY := true
 MR_QCOM_OVERLAY_HEADER := $(BOARD_PATH)/multirom/mr_qcom_overlay.h
@@ -147,8 +147,8 @@ DEVICE_RESOLUTION := 1080x1920
 MR_PIXEL_FORMAT := "RGBA_8888"
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 MR_DEV_BLOCK_BOOTDEVICE := true
-MR_ENCRYPTION := true
-MR_ENCRYPTION_SETUP_SCRIPT := $(BOARD_PATH)/multirom/mr_cp_crypto.sh
+#MR_ENCRYPTION := true
+#MR_ENCRYPTION_SETUP_SCRIPT := $(BOARD_PATH)/multirom/mr_cp_crypto.sh
 
 # Versioning
 TW_DEVICE_VERSION := 3
