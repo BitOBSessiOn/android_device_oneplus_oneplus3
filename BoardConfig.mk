@@ -48,7 +48,9 @@ TARGET_USES_64_BIT_BINDER := true
 
 ENABLE_CPUSETS := true
 
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.selinux=enforcing user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff androidboot.bootdevice=624000.ufshc
+# Kernel
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff
+#BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.selinux=enforcing user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff androidboot.bootdevice=624000.ufshc
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x02000000
@@ -60,6 +62,8 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_KERNEL_APPEND_DTB := true
 TARGET_KERNEL_SOURCE := kernel/oneplus/msm8996
 TARGET_KERNEL_CONFIG := omni_oneplus3_defconfig
+
+#TARGET_PREBUILT_KERNEL := $(BOARD_PATH)/Image.gz-dtb
 
 # partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
@@ -76,84 +80,8 @@ TARGET_USES_QCOM_BSP := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
-# RIL
-BOARD_PROVIDES_LIBRIL := true
-
-# Display
-BOARD_USES_ADRENO := true
-TARGET_QCOM_DISPLAY_VARIANT := caf-msm8996
-USE_OPENGL_RENDERER := true
-TARGET_USES_ION := true
-TARGET_USES_C2D_COMPOSITION := true
-TARGET_USES_OVERLAY := true
-OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
-MAX_EGL_CACHE_KEY_SIZE := 12*1024
-MAX_EGL_CACHE_SIZE := 2048*1024
-TARGET_CONTINUOUS_SPLASH_ENABLED := true
-MAX_VIRTUAL_DISPLAY_DIMENSION := 4096
-TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
-
-# Audio/media
-TARGET_QCOM_AUDIO_VARIANT := caf-msm8996
-TARGET_QCOM_MEDIA_VARIANT := caf-msm8996
-
-# audio
-#AUDIO_FEATURE_ENABLED_AAC_ADTS_OFFLOAD := true
-AUDIO_FEATURE_ENABLED_ACDB_LICENSE := true
-#AUDIO_FEATURE_ENABLED_APE_OFFLOAD := true
-#AUDIO_FEATURE_ENABLED_ALAC_OFFLOAD := true
-AUDIO_FEATURE_ENABLED_ANC_HEADSET := true
-AUDIO_FEATURE_ENABLED_AUDIOSPHERE := true
-AUDIO_FEATURE_ENABLED_COMPRESS_VOIP := true
-AUDIO_FEATURE_ENABLED_DEV_ARBI := true
-AUDIO_FEATURE_ENABLED_EXTN_FORMATS := true
-AUDIO_FEATURE_ENABLED_FLAC_OFFLOAD := true
-AUDIO_FEATURE_ENABLED_FLUENCE := true
-AUDIO_FEATURE_ENABLED_HFP := true
-AUDIO_FEATURE_ENABLED_KPI_OPTIMIZE := true
-AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
-AUDIO_FEATURE_ENABLED_NT_PAUSE_TIMEOUT := true
-AUDIO_FEATURE_ENABLED_PCM_OFFLOAD := true
-AUDIO_FEATURE_ENABLED_PCM_OFFLOAD_24 := true
-AUDIO_FEATURE_ENABLED_PROXY_DEVICE := true
-#AUDIO_FEATURE_ENABLED_VORBIS_OFFLOAD := true
-#AUDIO_FEATURE_ENABLED_WMA_OFFLOAD := true
-
-AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
-BOARD_USES_ALSA_AUDIO := true
-BOARD_SUPPORTS_SOUND_TRIGGER := false
-USE_CUSTOM_AUDIO_POLICY := 1
-TARGET_USES_QCOM_MM_AUDIO := true
-SNDRV_COMPRESS_SET_NEXT_TRACK_PARAM := true
-AUDIO_FEATURE_ENABLED_PLAYBACK_ULL := false
-
-# Camera
-USE_CAMERA_STUB := true
-TARGET_USES_MEDIA_EXTENSIONS := true
-TARGET_CAMERASERVICE_CLOSES_NATIVE_HANDLES := true
-
 # Disable secure discard because it's SLOW
 BOARD_SUPPRESS_SECURE_ERASE := true
-
-# Bluetooth
-BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_QCOM := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(BOARD_PATH)/bluetooth
-BOARD_HAS_QCA_BT_ROME := true
-QCOM_BT_USE_BTNV := true
-TARGET_QCOM_BLUETOOTH_VARIANT := caf-msm8996
-
-# Wifi
-BOARD_HAS_QCOM_WLAN              := true
-BOARD_WLAN_DEVICE                := qcwcn
-WPA_SUPPLICANT_VERSION           := VER_0_8_X
-BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-BOARD_HOSTAPD_DRIVER             := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-WIFI_DRIVER_FW_PATH_STA          := "sta"
-WIFI_DRIVER_FW_PATH_AP           := "ap"
-WIFI_DRIVER_FW_PATH_P2P          := "p2p"
 
 # charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
@@ -169,36 +97,8 @@ TARGET_INIT_VENDOR_LIB := libinit_oneplus3
 # liblights
 TARGET_PROVIDES_LIBLIGHT := true
 
-# Sensors
-USE_SENSOR_MULTI_HAL := true
-
-# NFC
-TARGET_USES_NQ_NFC := true
-BOARD_NFC_CHIPSET := pn548
-
-# ANT+
-BOARD_ANT_WIRELESS_DEVICE := "qualcomm-uart"
-
-# Crypto
-TARGET_HW_DISK_ENCRYPTION := true
-TARGET_CRYPTFS_HW_PATH := $(BOARD_PATH)/cryptfs_hw
-
 # Increase coldboot timeout
 TARGET_INCREASES_COLDBOOT_TIMEOUT := true
-
-# CNE and DPM
-TARGET_LDPRELOAD := libNimsWrap.so
-BOARD_USES_QCNE := true
-
-# selinux
-include device/qcom/sepolicy/sepolicy.mk
-
-BOARD_SEPOLICY_DIRS += $(BOARD_PATH)/sepolicy
-
-BOARD_SECCOMP_POLICY += $(BOARD_PATH)/seccomp
-
-# for offmode charging
-BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 
 # Recovery:Start
 TARGET_RECOVERY_FSTAB := $(BOARD_PATH)/configs/fstab.qcom
@@ -209,3 +109,63 @@ TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_DEFAULT_LANGUAGE := en-US
 TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_CRYPTO := true
+
+#TWRP Extra params
+#RECOVERY_SDCARD_ON_DATA := true
+#BOARD_HAS_NO_SELECT_BUTTON := true
+#TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
+#TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/module/g_android/parameters/file"
+TW_MAX_BRIGHTNESS := 255
+TW_DEFAULT_BRIGHTNESS := 100
+#TW_SCREEN_BLANK_ON_BOOT := true
+TW_MTP_DEVICE := "/dev/mtp_usb"
+#TW_NO_EXFAT_FUSE := true
+#BOARD_SUPPRESS_EMMC_WIPE := true
+#TW_UNMOUNT_FIRMWARE_ON_BOOT := true
+#TWHAVE_SELINUX := true
+TW_INPUT_BLACKLIST := "hbtp_vm"
+
+# MR config. MultiROM also uses parts of TWRP config
+TARGET_RECOVERY_IS_MULTIROM := true
+MR_NO_KEXEC := enabled
+MR_CONTINUOUS_FB_UPDATE := true
+MR_DPI := xhdpi
+MR_DPI_FONT := 340
+MR_USE_MROM_FSTAB := true
+MR_FSTAB := $(BOARD_PATH)/multirom/mrom.fstab
+MR_INPUT_TYPE := type_b
+MR_INIT_DEVICES := $(BOARD_PATH)/multirom/mr_init_devices.c
+MR_KEXEC_MEM_MIN := 0xac000000
+MR_KEXEC_DTB := true
+MR_DEVICE_HOOKS := $(BOARD_PATH)/multirom/mr_hooks.c
+MR_DEVICE_HOOKS_VER := 4
+MR_DEVICE_VARIANTS := OnePlus3 oneplus3 OnePlus3T oneplus3t
+MR_USE_QCOM_OVERLAY := true
+MR_QCOM_OVERLAY_HEADER := $(BOARD_PATH)/multirom/mr_qcom_overlay.h
+MR_QCOM_OVERLAY_CUSTOM_PIXEL_FORMAT := MDP_RGBX_8888
+# bootmenu
+DEVICE_RESOLUTION := 1080x1920
+MR_PIXEL_FORMAT := "RGBA_8888"
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+#MR_DEVICE_BOOTDEVICE := /dev/block/sde18
+MR_DEV_BLOCK_BOOTDEVICE := true
+#MR_DEVICE_SPECIFIC_VERSION := BitO
+#MR_ENCRYPTION := true
+#MR_ENCRYPTION_SETUP_SCRIPT := $(BOARD_PATH)/multirom/mr_cp_crypto.sh
+
+#Force populating /dev/block/platform/msm_sdcc.1/by-name
+#from the emmc
+MR_POPULATE_BY_NAME_PATH := "/dev/block/platform/msm_sdcc.1/by-name"
+# "/dev/block/bootdevice/by-name"
+# "/dev/block/platform/soc/624000.ufshc/by-name"
+
+# Versioning
+TW_DEVICE_VERSION := 1
+
+include $(BOARD_PATH)/multirom/version/MR_REC_VERSION.mk
+
+ifeq ($(MR_REC_VERSION),)
+MR_REC_VERSION := $(shell date -u +%Y%m%d)-01
+endif
+
+BOARD_MKBOOTIMG_ARGS += --board mrom$(MR_REC_VERSION)
